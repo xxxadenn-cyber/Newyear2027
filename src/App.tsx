@@ -86,7 +86,7 @@ function App() {
     switch (activeTab) {
       case 'home': return <HomeScreen onNavigate={handleNavigate} tabs={TABS} />;
       case 'venue': return <VenueTab isAdmin={isAdmin} />;
-      case 'news': return <NewsTab />;
+      case 'news': return <NewsTab isAdmin={isAdmin} />;
       case 'menu': return <MenuTab isAdmin={isAdmin} />;
       case 'activities': return <ActivitiesTab isAdmin={isAdmin} />;
       case 'music': return <MusicTab isAdmin={isAdmin} />;
