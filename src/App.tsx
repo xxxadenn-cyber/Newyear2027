@@ -34,6 +34,8 @@ declare global {
         setHeaderColor: (color: string) => void;
         setBackgroundColor: (color: string) => void;
         enableClosingConfirmation?: () => void;
+        initData?: string;
+        initDataUnsafe?: { user?: { id?: number } };
         HapticFeedback?: {
           impactOccurred: (type: string) => void;
           selectionChanged: () => void;
@@ -46,6 +48,7 @@ declare global {
 
 function App() {
   const [activeTab, setActiveTab] = useState('home');
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const tg = window.Telegram?.WebApp;
@@ -55,6 +58,17 @@ function App() {
       tg.setHeaderColor('#f4f8fb');
       tg.setBackgroundColor('#f4f8fb');
     }
+
+    // Проверяем статус администратора на сервере
+    const initData = tg?.initData || '';
+    fetch('/api/check-admin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ initData }),
+    })
+      .then((res) => res.json())
+      .then((data) => setIsAdmin(Boolean(data?.isAdmin)))
+      .catch(() => setIsAdmin(false));
   }, []);
 
   const handleNavigate = (tabId: string) => {
@@ -70,14 +84,15 @@ function App() {
   };
 
   const renderContent = () => {
+    const adminProps = { isAdmin };
     switch (activeTab) {
       case 'home': return <HomeScreen onNavigate={handleNavigate} tabs={TABS} />;
-      case 'venue': return <VenueTab />;
-      case 'news': return <NewsTab />;
-      case 'menu': return <MenuTab />;
-      case 'activities': return <ActivitiesTab />;
-      case 'photos': return <PhotosTab />;
-      case 'music': return <MusicTab />;
+      case 'venue': return <VenueTab {...adminProps} />;
+      case 'news': return <NewsTab {...adminProps} />;
+      case 'menu': return <MenuTab {...adminProps} />;
+      case 'activities': return <ActivitiesTab {...adminProps} />;
+      case 'photos': return <PhotosTab {...adminProps} />;
+      case 'music': return <MusicTab {...adminProps} />;
       default: return <HomeScreen onNavigate={handleNavigate} tabs={TABS} />;
     }
   };
