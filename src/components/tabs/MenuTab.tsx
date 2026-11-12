@@ -6,27 +6,37 @@ type MenuItem = { id: number; name: string; description?: string; tags?: string[
 type MenuSection = { id: string; title: string; icon: string; items: MenuItem[] };
 
 export function MenuTab({ isAdmin }: { isAdmin?: boolean }) {
-  const [sections, setSections] = useState<MenuSection[]>(DEFAULT_MENU);
-  const [activeSection, setActiveSection] = useState(DEFAULT_MENU[0].id);
+  // Безопасно приводим дефолтные данные к типу
+  const safeDefault = (DEFAULT_MENU || []) as unknown as MenuSection[];
+  
+  const [sections, setSections] = useState<MenuSection[]>(safeDefault);
+  // Инициализируем пустой строкой, чтобы не было ошибки undefined
+  const [activeSection, setActiveSection] = useState<string>(''); 
   
   const [editing, setEditing] = useState(false);
-  const [draft, setDraft] = useState<MenuSection[]>(DEFAULT_MENU);
+  const [draft, setDraft] = useState<MenuSection[]>(safeDefault);
   const [saving, setSaving] = useState(false);
 
-  // Загружаем данные с сервера
+  // Устанавливаем активный раздел, когда данные загрузились
+  useEffect(() => {
+    if (sections.length > 0 && !activeSection) {
+      setActiveSection(sections[0].id);
+    }
+  }, [sections, activeSection]);
+
   useEffect(() => {
     fetch('/api/get-data')
       .then((r) => r.json())
       .then((data) => {
-        if (data?.menu) {
+        if (data?.menu && Array.isArray(data.menu) && data.menu.length > 0) {
           setSections(data.menu);
           setDraft(data.menu);
+          setActiveSection(data.menu[0].id);
         }
       })
       .catch(() => {});
   }, []);
 
-  // Сохраняем данные
   const save = async () => {
     setSaving(true);
     const initData = window.Telegram?.WebApp?.initData || '';
@@ -48,7 +58,6 @@ export function MenuTab({ isAdmin }: { isAdmin?: boolean }) {
     }
   };
 
-  // Функции для работы с черновиком (draft)
   const updateItem = (secId: string, itemId: number, field: string, value: string) => {
     setDraft(draft.map(sec => {
       if (sec.id !== secId) return sec;
@@ -74,9 +83,14 @@ export function MenuTab({ isAdmin }: { isAdmin?: boolean }) {
     }));
   };
 
-  // Текущий раздел для отображения
-  const currentView = sections.find((s) => s.id === activeSection)!;
-  const currentDraft = draft.find((s) => s.id === activeSection)!;
+  // Если разделов нет вообще - показываем заглушку
+  if (sections.length === 0) {
+    return <div className="text-white/50 text-center py-10">Меню пока пустое...</div>;
+  }
+
+  // Ищем текущий раздел, если не нашли - берем первый
+  const currentView = sections.find((s) => s.id === activeSection) || sections[0];
+  const currentDraft = draft.find((s) => s.id === activeSection) || draft[0];
 
   return (
     <div className="space-y-4 fade-in-up">
@@ -89,7 +103,7 @@ export function MenuTab({ isAdmin }: { isAdmin?: boolean }) {
         </button>
       )}
 
-      {editing && (
+      {editing && currentDraft && (
         <div className="glass-card rounded-3xl p-5 space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-semibold text-white">Редактирование: {currentDraft.title}</h3>
@@ -129,7 +143,6 @@ export function MenuTab({ isAdmin }: { isAdmin?: boolean }) {
         </div>
       )}
 
-      {/* Переключатель разделов (виден всегда) */}
       <div className="flex gap-2 overflow-x-auto no-scrollbar -mx-5 px-5 pb-1">
         {sections.map((section) => (
           <button
@@ -147,7 +160,6 @@ export function MenuTab({ isAdmin }: { isAdmin?: boolean }) {
         ))}
       </div>
 
-      {/* Список блюд (виден всегда) */}
       <div className="space-y-2.5">
         {currentView.items.length === 0 && (
           <p className="text-center text-sm text-white/40 py-4">В этом разделе пока нет блюд</p>

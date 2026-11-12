@@ -52,16 +52,48 @@ export const VENUE = {
 };
 
 export const ANNOUNCEMENTS: Announcement[] = [
- 
+  {
+
+  },
 ];
 
 export const MENU_SECTIONS: MenuSection[] = [
+  {
+    id: 'salads',
+    title: 'Салаты',
+    icon: '🥗',
+    items: [
+
+    ],
+  },
+  {
+    id: 'hot',
+    title: 'Горячее',
+    icon: '🍖',
+    items: [
+  
+    ],
+  },
+  {
+    id: 'desserts',
+    title: 'Десерты',
+    icon: '🍰',
+    items: [
  
+    ],
+  },
+  {
+    id: 'drinks',
+    title: 'Напитки',
+    icon: '🥂',
+    items: [
+
+    ],
+  },
 ];
 
 export const ACTIVITIES: Activity[] = [
-  {
-  },
+
 ];
 
 export const PHOTOS = {
@@ -85,4 +117,5 @@ export const TABS: TabConfig[] = [
   { id: 'news', label: 'Инфо', icon: 'megaphone' },
   { id: 'menu', label: 'Меню', icon: 'utensils' },
   { id: 'activities', label: 'Активности', icon: 'party-popper' },
+  { id: 'music', label: 'Музыка', icon: 'music' },
 ];

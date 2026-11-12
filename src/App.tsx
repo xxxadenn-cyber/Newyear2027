@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
   Home, MapPin, Megaphone, Utensils, PartyPopper,
+  Camera, Music,
   ArrowLeft, type LucideIcon,
 } from 'lucide-react';
 import { TABS } from '@/config';
@@ -11,6 +12,7 @@ import { VenueTab } from '@/components/tabs/VenueTab';
 import { NewsTab } from '@/components/tabs/NewsTab';
 import { MenuTab } from '@/components/tabs/MenuTab';
 import { ActivitiesTab } from '@/components/tabs/ActivitiesTab';
+import { MusicTab } from '@/components/tabs/MusicTab';
 
 const ICON_MAP: Record<string, LucideIcon> = {
   home: Home,
@@ -18,6 +20,8 @@ const ICON_MAP: Record<string, LucideIcon> = {
   megaphone: Megaphone,
   utensils: Utensils,
   'party-popper': PartyPopper,
+  camera: Camera,
+  music: Music,
 };
 
 declare global {
@@ -54,7 +58,7 @@ function App() {
       tg.setBackgroundColor('#f4f8fb');
     }
 
-    // Проверяем статус администратора на сервере
+    // Проверяем, админ ли пользователь
     const initData = tg?.initData || '';
     fetch('/api/check-admin', {
       method: 'POST',
@@ -79,13 +83,13 @@ function App() {
   };
 
   const renderContent = () => {
-    const adminProps = { isAdmin };
     switch (activeTab) {
       case 'home': return <HomeScreen onNavigate={handleNavigate} tabs={TABS} />;
-      case 'venue': return <VenueTab {...adminProps} />;
-      case 'news': return <NewsTab {...adminProps} />;
-      case 'menu': return <MenuTab {...adminProps} />;
-      case 'activities': return <ActivitiesTab {...adminProps} />;
+      case 'venue': return <VenueTab isAdmin={isAdmin} />;
+      case 'news': return <NewsTab />;
+      case 'menu': return <MenuTab isAdmin={isAdmin} />;
+      case 'activities': return <ActivitiesTab isAdmin={isAdmin} />;
+      case 'music': return <MusicTab isAdmin={isAdmin} />;
       default: return <HomeScreen onNavigate={handleNavigate} tabs={TABS} />;
     }
   };
@@ -136,8 +140,7 @@ function App() {
       {/* Bottom nav */}
       <nav className="fixed bottom-0 left-0 right-0 z-20 glass border-t border-white/5">
         <div className="max-w-md mx-auto px-2" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
-          {/* Добавлен justify-center для центрирования 5 вкладок */}
-          <div className="flex justify-center gap-1 overflow-x-auto no-scrollbar py-2">
+          <div className="flex gap-1 overflow-x-auto no-scrollbar py-2">
             {TABS.map((tab: TabConfig) => {
               const Icon = ICON_MAP[tab.icon];
               const isActive = activeTab === tab.id;
