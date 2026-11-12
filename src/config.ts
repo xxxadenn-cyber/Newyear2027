@@ -52,57 +52,15 @@ export const VENUE = {
 };
 
 export const ANNOUNCEMENTS: Announcement[] = [
-  {
-    id: 1,
-    date: '15 ноября',
-    title: 'Окончательное решение вопроса места проведения праздника',
-    text: '',
-  },
+ 
 ];
 
 export const MENU_SECTIONS: MenuSection[] = [
-  {
-    id: 'salads',
-    title: 'Салаты',
-    icon: '🥗',
-    items: [
-      { id: 1, name: 'Информация будет позже', description: 'Организацией занимаются Владислав Черепанов И Артем Кукандин', tags: ['порядочные'] },
-      
-    ],
-  },
-  {
-    id: 'hot',
-    title: 'Горячее',
-    icon: '🍖',
-    items: [
-      { id: 1, name: 'Информация будет позже', description: 'Организацией занимаются Владислав Черепанов И Артем Кукандин', tags: ['порядочные'] },
-    ],
-  },
-  {
-    id: 'desserts',
-    title: 'Десерты',
-    icon: '🍰',
-    items: [
-            { id: 1, name: 'Информация будет позже', description: 'Организацией занимаются Владислав Черепанов И Артем Кукандин', tags: ['порядочные'] },
-    ],
-  },
-  {
-    id: 'drinks',
-    title: 'Напитки',
-    icon: '🥂',
-    items: [
-            { id: 1, name: 'Информация будет позже', description: 'Организацией занимаются Владислав Черепанов И Артем Кукандин', tags: ['порядочные'] },
-    ],
-  },
+ 
 ];
 
 export const ACTIVITIES: Activity[] = [
   {
-    id: 1,
-    time: 'Смотрящие',
-    title: 'Организуют',
-    description: 'Организацией занимаются Виктория и Егор Мартюшев',
-    icon: '🎁',
   },
 ];
 
@@ -127,6 +85,4 @@ export const TABS: TabConfig[] = [
   { id: 'news', label: 'Инфо', icon: 'megaphone' },
   { id: 'menu', label: 'Меню', icon: 'utensils' },
   { id: 'activities', label: 'Активности', icon: 'party-popper' },
-  { id: 'photos', label: 'Фото', icon: 'camera' },
-  { id: 'music', label: 'Музыка', icon: 'music' },
 ];

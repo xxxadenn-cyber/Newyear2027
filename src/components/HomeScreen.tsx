@@ -11,7 +11,7 @@ export function HomeScreen({ onNavigate, tabs }: HomeScreenProps) {
   const quickActions = [
     { id: 'venue', icon: '📍', label: 'Место' },
     { id: 'menu', icon: '🍽', label: 'Меню' },
-    { id: 'music', icon: '🎵', label: 'Музыка' },
+    { id: 'news', icon: '📢', label: 'Инфо' }, // Заменили музыку на инфо
   ];
 
   return (
@@ -61,7 +61,7 @@ export function HomeScreen({ onNavigate, tabs }: HomeScreenProps) {
           <h2 className="text-xs font-extrabold uppercase tracking-wider text-white/40">Быстрый доступ</h2>
           <span className="h-px w-16 bg-[#f83d43]/20" />
         </div>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-3 gap-3 justify-center"> {/* Добавлен justify-center */}
           {quickActions.map((action) => (
             <button
               key={action.id}
