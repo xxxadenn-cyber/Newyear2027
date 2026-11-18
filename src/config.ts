@@ -104,6 +104,18 @@ export const ACTIVITIES: Activity[] = [
 
 ];
 
+// config.ts (или где у тебя MENU_SECTIONS)
+export type Guest = {
+  id: string;
+  name: string;
+  telegram?: string; // @username или ссылка
+  note?: string;     // кто пригласил / сторона / что угодно
+};
+
+export const DEFAULT_GUESTS: Guest[] = [
+  // { id: 'g1', name: 'Иван', telegram: '@ivan', note: 'друг жениха' },
+];
+
 export const PHOTOS = {
   uploadText: 'Скидываем фото сюда!',
   description: 'Создаём общую фотогалерею праздника. Загружайте свои фото и видео - поделимся впечатлениями и сохраним лучшие моменты вечера.',
