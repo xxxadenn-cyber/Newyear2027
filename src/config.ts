@@ -111,7 +111,7 @@ export const PHOTOS = {
 };
 
 export const MUSIC = {
-  playlistText: 'Плейлист Яндекс Музыки',
+  playlistText: 'Плейлист Музыки',
   playlistDescription: 'Слушайте новогодний плейлист, который мы собрали специально для вечеринки. Включает классические новогодние хиты и современные треки.',
   yandexPlaylist: 'https://music.yandex.ru/playlists/052d839d-e327-525b-9370-828092047e8f?ref_id=094CA935-D856-4DFD-94C2-142C4081F11D&utm_medium=copy_link',
   suggestText: 'Предложить свой трек',
