@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
   Home, MapPin, Megaphone, Utensils, PartyPopper,
-  Camera, Music, Users
+  Camera, Music, Users,
   ArrowLeft, type LucideIcon,
 } from 'lucide-react';
 import { TABS } from '@/config';
