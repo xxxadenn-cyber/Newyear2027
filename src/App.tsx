@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
   Home, MapPin, Megaphone, Utensils, PartyPopper,
-  Camera, Music,
+  Camera, Music, Users
   ArrowLeft, type LucideIcon,
 } from 'lucide-react';
 import { TABS } from '@/config';
@@ -23,6 +23,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   'party-popper': PartyPopper,
   camera: Camera,
   music: Music,
+  users: Users,
 };
 
 declare global {
