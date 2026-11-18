@@ -87,7 +87,7 @@ export function MusicTab({ isAdmin }: { isAdmin?: boolean }) {
             className="w-full rounded-lg bg-white/5 px-3 py-2 text-sm text-white"
             value={draft.yandexPlaylist}
             onChange={(e) => setDraft({ ...draft, yandexPlaylist: e.target.value })}
-            placeholder="Ссылка на плейлист Яндекса"
+            placeholder="Ссылка на плейлист"
           />
           
           <hr className="border-white/10 my-2" />
@@ -130,7 +130,7 @@ export function MusicTab({ isAdmin }: { isAdmin?: boolean }) {
           </div>
           <div className="min-w-0 flex-1">
             <h2 className="text-sm font-bold text-white">{music.playlistText}</h2>
-            <p className="text-xs text-white/50">Яндекс Музыка</p>
+            <p className="text-xs text-white/50">Музыка</p>
           </div>
         </div>
         <p className="text-sm text-white/60 leading-relaxed mb-4">
