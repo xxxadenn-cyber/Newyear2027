@@ -58,6 +58,14 @@ export const ANNOUNCEMENTS: Announcement[] = [
 ];
 
 export const MENU_SECTIONS: MenuSection[] = [
+ {
+    id: 'appetizer',
+    title: 'Закуски',
+    icon: '🌯',
+    items: [
+
+    ],
+  },
   {
     id: 'salads',
     title: 'Салаты',
