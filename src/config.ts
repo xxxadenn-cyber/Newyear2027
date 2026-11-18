@@ -138,4 +138,5 @@ export const TABS: TabConfig[] = [
   { id: 'menu', label: 'Меню', icon: 'utensils' },
   { id: 'activities', label: 'Активности', icon: 'party-popper' },
   { id: 'music', label: 'Музыка', icon: 'music' },
+  { id: 'guests', label: 'Гости', icon: 'guests' }
 ];
