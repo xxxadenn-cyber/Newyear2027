@@ -13,6 +13,7 @@ import { NewsTab } from '@/components/tabs/NewsTab';
 import { MenuTab } from '@/components/tabs/MenuTab';
 import { ActivitiesTab } from '@/components/tabs/ActivitiesTab';
 import { MusicTab } from '@/components/tabs/MusicTab';
+import { GuestsTab } from '@/components/tabs/GuestsTab';
 
 const ICON_MAP: Record<string, LucideIcon> = {
   home: Home,
@@ -90,6 +91,7 @@ function App() {
       case 'menu': return <MenuTab isAdmin={isAdmin} />;
       case 'activities': return <ActivitiesTab isAdmin={isAdmin} />;
       case 'music': return <MusicTab isAdmin={isAdmin} />;
+      case 'guests': return <GuestsTab isAdmin={isAdmin} />;
       default: return <HomeScreen onNavigate={handleNavigate} tabs={TABS} />;
     }
   };
